@@ -2,12 +2,13 @@ import React from 'react';
 import './App.css';
 import {MdClose} from "react-icons/md";
 import {MdEdit} from "react-icons/md";
+import {MdCheck} from "react-icons/md";
 
 class App extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = {newTODO: '', sortedKeys: []}
+        this.state = {newTODO: '', sortedKeys: []};
     }
 
     sortKeys = () => {
@@ -56,23 +57,58 @@ class App extends React.Component {
                 <form id={'add'} onSubmit={this.submitTODO}>
                     <label>
                         Add new TO DO:
-                        <input id={'textIn'} type={'text'} value={this.state.newTODO} onChange={this.writeTODO} />
+                        <input id={'textIn'} type={'text'} value={this.state.newTODO}
+                           onChange={this.writeTODO} maxLength={50} />
                     </label>
                     <input type="submit" value="Submit"/>
                 </form>
 
-                <div id={'list'}>
-                    {this.state.sortedKeys.map((obj)=>(
-                        <div className={'entry'}>
-                            <p className={'text'}>{localStorage.getItem(obj)}</p>
-                            <MdEdit className={'edit'} color={'blue'} />
-                            <MdClose className={'delete'} color={'red'} onClick={()=>this.deleteTODO(obj)} />
-                        </div>
-                    ))}
-                </div>
+                <TODOList keys={this.state.sortedKeys} del={this.deleteTODO} />
 
             </div>
         );
+    }
+}
+
+class TODOList extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {editing: '', newVal: ''};
+    }
+
+    startEditing = (obj) => {
+        this.setState({newVal: localStorage.getItem(obj)});
+        this.setState({editing: obj});
+    }
+
+    edit = (event) => {
+        this.setState({newVal: event.target.value});
+    }
+
+    stopEditing = (obj) => {
+        localStorage.setItem(obj, this.state.newVal);
+        this.setState({editing: ''});
+    }
+
+    render() {
+        return (
+            <div id={'list'}>
+                {this.props.keys.map((obj)=>(
+                    this.state.editing === obj ?
+                        <div className={'entry'}>
+                            <input value={this.state.newVal} onChange={this.edit} />
+                            <MdCheck className={'edit'} color={'green'} onClick={()=>this.stopEditing(obj)} />
+                            <MdClose className={'delete'} color={'red'} onClick={()=>this.props.del(obj)} />
+                        </div>
+                    :
+                        <div className={'entry'}>
+                            <p className={'text'}>{localStorage.getItem(obj)}</p>
+                            <MdEdit className={'edit'} color={'blue'} onClick={()=>this.startEditing(obj)} />
+                            <MdClose className={'delete'} color={'red'} onClick={()=>this.props.del(obj)} />
+                        </div>
+                ))}
+            </div>
+        )
     }
 }
 
