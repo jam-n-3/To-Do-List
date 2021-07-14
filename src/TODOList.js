@@ -37,8 +37,8 @@ class TODOList extends React.Component {
                         <div className={'entry'}>
                             <input className={'textEdit'} value={this.state.newVal} onChange={this.edit}
                                onKeyDown={(e)=>this.keyEdit(e, obj)} autoFocus />
-                            <MdCheck className={'edit'} color={'green'} onClick={()=>this.stopEditing(obj)} />
-                            <MdClose className={'delete'} color={'red'} onClick={this.cancelEdit} />
+                           <MdCheck className={'edit'} color={'green'} onClick={()=>this.stopEditing(obj)} />
+                           <MdClose className={'delete'} color={'red'} onClick={this.cancelEdit} />
                         </div>
                         :
                         <div className={'entry'}>

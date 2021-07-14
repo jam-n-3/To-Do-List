@@ -11,6 +11,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-top: 5vh;
 }
 
 .textIn {
@@ -59,7 +60,12 @@
 }
 
 .text {
+  flex: 1;
   margin-left: 2vw;
+}
+
+.icons {
+
 }
 
 .edit {
@@ -70,7 +76,6 @@
 }
 
 .delete {
-  margin-left: 1vw;
   margin-right: 2vw;
   font-size: 150%;
   cursor: pointer;
@@ -84,4 +89,18 @@
 
 .bottom {
   min-height: 10vh;
+}
+
+@media only screen and (max-width: 1000px) {
+  #addBar {width: 80vw;}
+  .add {font-size: 28px;}
+  #heading {width: 80vw;}
+  .entry {width: 80vw;}
+}
+
+@media only screen and (max-width: 700px) {
+  #addBar {width: 90vw;}
+  .add {font-size: 24px;}
+  #heading {width: 90vw;}
+  .entry {width: 90vw;}
 }
