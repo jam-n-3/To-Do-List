@@ -11,7 +11,31 @@
   justify-content: center;
 }
 
-#textin {
+#textIn {
   margin: 1vw;
   width: 20vw;
+}
+
+.entry {
+  background-color: #fafafa;
+  margin: 1vw;
+  width: 60vw;
+  display: flex;
+  align-items: center;
+}
+
+.text {
+  margin-left: 2vw;
+}
+
+.edit {
+  margin-left: auto;
+  margin-right: 1vw;
+  font-size: 150%;
+}
+
+.delete {
+  margin-left: 1vw;
+  margin-right: 2vw;
+  font-size: 150%;
 }
