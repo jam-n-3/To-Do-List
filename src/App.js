@@ -1,5 +1,6 @@
 import React from 'react';
 import './App.css';
+import {MdAdd} from "react-icons/md";
 import TODOList from "./TODOList";
 
 class App extends React.Component {
@@ -42,6 +43,12 @@ class App extends React.Component {
         this.sortKeys();
     }
 
+    keySubmit = (event) => {
+        if (event.key === 'Enter') {
+            this.submitTODO(event);
+        }
+    }
+
     componentDidMount() {
         this.sortKeys();
     }
@@ -49,17 +56,22 @@ class App extends React.Component {
     render() {
         return (
             <div id={'body'}>
-                <h1>TO DO LIST</h1>
 
-                <form id={'add'} onSubmit={this.submitTODO}>
-                    <label>
-                        Add new TO DO:
-                        <input id={'textIn'} type={'text'} value={this.state.newTODO} onChange={this.writeTODO} />
-                    </label>
-                    <input type="submit" value="Submit"/>
-                </form>
+                <div id={'addBar'}>
+                    <input className={'textIn'} type={'text'} value={this.state.newTODO}
+                           onChange={this.writeTODO} placeholder={"Add New 'To Do'"} onKeyDown={this.keySubmit} />
+                    <div className={'addBox'}>
+                        <MdAdd className={'add'} color={'grey'} onClick={this.submitTODO} />
+                    </div>
+                </div>
+
+                <div id={'heading'}>
+                    <p>TO DO LIST</p>
+                </div>
 
                 <TODOList keys={this.state.sortedKeys} del={this.deleteTODO} />
+
+                <span className={'bottom'} />
             </div>
         );
     }

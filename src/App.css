@@ -1,29 +1,61 @@
 #body {
   display: flex;
+  min-height: 100vh;
   flex-direction: column;
   align-items: center;
+  background-color: #fafafa;
 }
 
-#add {
-  background-color: #fafafa;
+#addBar {
   width: 60vw;
   display: flex;
+  align-items: center;
   justify-content: center;
 }
 
-#textIn {
-  margin: 1vw;
-  width: 20vw;
+.textIn {
+  margin: 1vw 0 1vw 1vw;
+  padding: 0.5vw;
+  flex: 1;
+  font-size: 16px;
+}
+
+.addBox {
+  background-color: lightgrey;
+  border: 1px solid grey;
+  border-top-right-radius: 50%;
+  border-bottom-right-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.add {
+  font-size: 32px;
+  cursor: pointer;
+}
+
+#heading {
+  margin-top: 5vh;
+  background-color: white;
+  width: 60vw;
+  border: 1px solid grey;
+}
+
+#heading p {
+  margin-left: 2vw;
+  font-weight: bold;
 }
 
 .entry {
-  background-color: #fafafa;
-  margin: 1vw;
+  background-color: white;
   width: 60vw;
   display: flex;
   align-items: center;
   flex-wrap: wrap;
   overflow: auto;
+  border-bottom: 1px solid lightgrey;
+  border-left: 1px solid lightgrey;
+  border-right: 1px solid lightgrey;
 }
 
 .text {
@@ -34,10 +66,22 @@
   margin-left: auto;
   margin-right: 1vw;
   font-size: 150%;
+  cursor: pointer;
 }
 
 .delete {
   margin-left: 1vw;
   margin-right: 2vw;
   font-size: 150%;
+  cursor: pointer;
+}
+
+.textEdit {
+  margin: 0.95vw 2vw;
+  flex: 1;
+  font-size: 16px;
+}
+
+.bottom {
+  min-height: 10vh;
 }

@@ -26,20 +26,27 @@ class TODOList extends React.Component {
         this.setState({editing: ''});
     }
 
+    keyEdit = (event, obj) => {
+        if (event.key === 'Enter') {
+            this.stopEditing(obj);
+        }
+    }
+
     render() {
         return (
             <div id={'list'}>
                 {this.props.keys.map((obj)=>(
                     this.state.editing === obj ?
                         <div className={'entry'}>
-                            <input value={this.state.newVal} onChange={this.edit} />
+                            <input className={'textEdit'} value={this.state.newVal} onChange={this.edit}
+                               onKeyDown={(e)=>this.keyEdit(e, obj)} autoFocus />
                             <MdCheck className={'edit'} color={'green'} onClick={()=>this.stopEditing(obj)} />
                             <MdClose className={'delete'} color={'red'} onClick={this.cancelEdit} />
                         </div>
                         :
                         <div className={'entry'}>
                             <p className={'text'}>{localStorage.getItem(obj)}</p>
-                            <MdEdit className={'edit'} color={'blue'} onClick={()=>this.startEditing(obj)} />
+                            <MdEdit className={'edit'} color={'midnightblue'} onClick={()=>this.startEditing(obj)} />
                             <MdClose className={'delete'} color={'red'} onClick={()=>this.props.del(obj)} />
                         </div>
                 ))}
