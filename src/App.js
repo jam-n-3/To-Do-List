@@ -10,6 +10,7 @@ class App extends React.Component {
         this.state = {newTODO: '', sortedKeys: []};
     }
 
+    // ensures keys display in the order in which they were created
     sortKeys = () => {
         if (localStorage.length > 0) {
             let lsArr = [];
@@ -21,34 +22,32 @@ class App extends React.Component {
         }
     }
 
-    writeTODO = (event) => {
-        this.setState({newTODO: event.target.value});
-    }
+    // these three functions handle the appearing and disappearing of TODOs
+    writeTODO = (event) => this.setState({newTODO: event.target.value});
 
     submitTODO = (event) => {
         this.setState({newTODO: ''});
-        if (localStorage.length > 0) {
-            localStorage.setItem((Math.max(...Object.keys(localStorage)) + 1).toString(), this.state.newTODO);
-        }
-        else {
+        localStorage.length > 0 ?
+            localStorage.setItem((Math.max(...Object.keys(localStorage)) + 1).toString(), this.state.newTODO)
+        :
             localStorage.setItem('0', this.state.newTODO);
-        }
         event.preventDefault();
         this.sortKeys();
     }
 
     deleteTODO = (key) => {
         localStorage.removeItem(key);
-        this.setState({sortedKeys: Object.keys(localStorage)});
         this.sortKeys();
     }
 
+    // this handy function checks if you submit by pressing the enter key
     keySubmit = (event) => {
         if (event.key === 'Enter') {
             this.submitTODO(event);
         }
     }
 
+    // this sorts the keys on load
     componentDidMount() {
         this.sortKeys();
     }

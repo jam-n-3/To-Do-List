@@ -8,13 +8,10 @@ class TODOList extends React.Component {
         this.state = {editing: '', newVal: ''};
     }
 
+    // these functions handle editing existing TODOs
     startEditing = (obj) => {
         this.setState({newVal: localStorage.getItem(obj)});
         this.setState({editing: obj});
-    }
-
-    edit = (event) => {
-        this.setState({newVal: event.target.value});
     }
 
     stopEditing = (obj) => {
@@ -22,9 +19,9 @@ class TODOList extends React.Component {
         this.setState({editing: ''});
     }
 
-    cancelEdit = () => {
-        this.setState({editing: ''});
-    }
+    edit = (event) => this.setState({newVal: event.target.value});
+
+    cancelEdit = () => this.setState({editing: ''});
 
     keyEdit = (event, obj) => {
         if (event.key === 'Enter') {
