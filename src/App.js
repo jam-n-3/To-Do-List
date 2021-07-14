@@ -7,7 +7,18 @@ class App extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = {newTODO: '', TODOs: localStorage.length}
+        this.state = {newTODO: '', sortedKeys: []}
+    }
+
+    sortKeys = () => {
+        if (localStorage.length > 0) {
+            let lsArr = [];
+            for (let i=0; i<localStorage.length; i++) {
+                lsArr[i] = parseInt(localStorage.key(i));
+            }
+            let srtArr = lsArr.sort((a, b) => a - b);
+            this.setState({sortedKeys: srtArr});
+        }
     }
 
     writeTODO = (event) => {
@@ -23,11 +34,17 @@ class App extends React.Component {
             localStorage.setItem('0', this.state.newTODO);
         }
         event.preventDefault();
+        this.sortKeys();
     }
 
     deleteTODO = (key) => {
         localStorage.removeItem(key);
-        this.setState({TODOs: localStorage.length});
+        this.setState({sortedKeys: Object.keys(localStorage)});
+        this.sortKeys();
+    }
+
+    componentDidMount() {
+        this.sortKeys();
     }
 
     render() {
@@ -45,7 +62,7 @@ class App extends React.Component {
                 </form>
 
                 <div id={'list'}>
-                    {Object.keys(localStorage).map((obj)=>(
+                    {this.state.sortedKeys.map((obj)=>(
                         <div className={'entry'}>
                             <p className={'text'}>{localStorage.getItem(obj)}</p>
                             <MdEdit className={'edit'} color={'blue'} />
